@@ -120,3 +120,21 @@ const modalContent = document.querySelector(".modal-content");
 modalContent.addEventListener("click", (event) => {
     event.stopPropagation();
 })
+
+//toggle menu
+function toggleMenu() {
+    let isOpen = false; // Use let para alterar o valor
+    const menuHamburger = document.getElementById('menu-toggle');
+    menuHamburger.addEventListener('click', (e) => {
+        isOpen = !isOpen; // Alterna o estado de isOpen
+        e.preventDefault();
+        const nav = document.getElementsByClassName('nav-links')[0]; // Acesse o primeiro item da coleção
+        if (isOpen) {
+            nav.classList.add('open'); // Use a classe 'open'
+        } else {
+            nav.classList.remove('open');
+        }
+    });
+}
+
+toggleMenu(); // Chame a função para ativar o evento

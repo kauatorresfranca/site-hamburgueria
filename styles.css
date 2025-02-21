@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 /* Corpo da página */
@@ -15,85 +16,96 @@ body {
 
 /* Cabeçalho de navegação */
 header {
-    background-color: #000000;
-    padding: 20px 0;
+    background-color: #000;
+    padding: 15px 20px;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 4;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* alterar para flex */
+/* Navbar flexível */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.navbar .logo {
-    /* Remova a propriedade de font-size já que é uma imagem */
-    width: auto;
-    /* Pode ajustar a largura se necessário */
-}
-
+/* Logo */
 .logo-img {
-    width: 300px;
-    /* Ajuste o tamanho da logo conforme necessário */
+    width: 180px;
     height: auto;
-    /* Mantém a proporção da imagem */
-    margin-left: 40px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.logo-img:hover {
-    animation: aumentarLogo 1s ease forwards;
-    /* Chama a animação ao passar o mouse */
-}
+#menu-toggle {
+    display: flex;
+    flex-direction: column;
 
-/* Definindo a animação */
-@keyframes aumentarLogo {
-    0% {
-        transform: scale(1);
-        /* Tamanho original */
-    }
-
-    100% {
-        transform: scale(1.2);
-        /* Aumenta 20% */
+    span {
+        margin-bottom: 3px;
+        background-color: #fff;
+        height: 2px;
+        width: 20px;
     }
 }
+
+.group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Ícone do menu mobile */
+#menu-toggle {
+    display: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Links de navegação */
 
 .nav-links {
     list-style: none;
     display: flex;
 }
 
-.nav-links li {
-    margin-left: 30px;
-}
-
 .nav-links li a {
     color: #fff;
     font-size: 1.2em;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease-in-out;
+    font-weight: bold;
+    margin-right: 16px;
+    ;
 }
 
 .nav-links li a:hover {
     color: #ff6600;
 }
 
+/* Estilo responsivo para mobile */
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: flex;
+        margin-left: 40px;
+    }
+
+    .navbar {
+        display: flex;
+        transition: all 3.5s ease-in-out;
+    }
+}
+
 /* Ajuste da navegação para dispositivos móveis */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        margin-top: 10px;
+        justify-content: space-between;
     }
 
     .nav-links li {
@@ -103,6 +115,33 @@ header {
 
     .nav-links li a {
         font-size: 1.5em;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 20px;
+
+        /*alterção aqui*/
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .nav-links.open {
+        /* Alterar para 'open' */
+        max-height: 300px;
+        /* Ajuste conforme o conteúdo */
+        opacity: 1;
+        visibility: visible;
     }
 }
 
@@ -275,7 +314,7 @@ header {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 5;
     left: 0;
     top: 0;
     width: 100%;
